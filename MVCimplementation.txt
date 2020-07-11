@@ -1,0 +1,16 @@
+1. Create model and search files inside their corresponding folders.
+    - model file names always use capital letters
+    - index.js (controller)
+    - Search.js (model)
+    - searView.js (view)
+
+2. axios - is ready for all browsers. use instead of fetch for async functions
+         - automatically returns json unlike fetch
+         - is also better with error handling
+
+        2.1 install axios ==> cmd: npm install axios --save
+        2.2 import axios in index.js
+
+3. Get api_id and api_key info from edamam.com
+        (e.g. api key - 3c7d945d
+              API URL - https://api.edamam.com/search)

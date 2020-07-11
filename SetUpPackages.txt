@@ -1,0 +1,92 @@
+Steps to Set-up
+1. Check if node and npm are installed
+    -if versions exists, it means they are installed
+        cmd: node-v 
+        cmd: npm -v
+2. install package.json
+        cmd: npm init
+3. install the following dev dependencies
+        cmd: npm install webpack --save-dev
+        cmd: npm install webpack-cli --save-dev
+        cmd: npm install webpack-dev-server --save-dev
+4. create webpack.config.js file
+    - specify module exports (entry, output, server)
+5. edit script in package.json
+    {
+        "dev": "webpack --mode development",
+        "build": "webpack --mode production", 
+        "start": "webpack-dev-server --mode development --open"
+    }
+6. Test if its working fine / errors
+        cmd: npm run dev - creates the file indicated in the output file in webpack.config.js
+        cmd: npm start build
+
+8. run file in a real webserver
+        cmd: npm run start
+
+9. install html plugins
+        - cmd: npm install html-webpack-plugin --save-dev
+        - require HtmlWebPackPlugin in webpack.config.js
+                const HtmlWebPackPlugin = require('html-webpack-plugin')
+        - all changes in the src/index.html will be reflected in the dist/index.html
+        - initialize plugins in module.exports
+                plugins: [] - contains arrays of all the plugins to be used in the webdev
+                plugins[
+                    new HtmlWebPackPlugin({
+                        filename: 'index.html',
+                        template: 'src/index.html'
+                    })
+                ]
+        - template contains the starting html file
+        - this is not saved on disk but is automatically streamed online
+
+10. run file    
+        cmd: npm run start
+        
+    Note: - when you run file, it will be on a live server (e.g. local: 8080)
+
+          - dist/index.html will not be reflected in the code editor files
+          because the file is not saved on disk but is streamed to the server.
+
+
+11. Install Babel
+        - babel converts latest codes in JS (ES6, ES7, etc) back to ES5 (basic state)
+        cmd: npm install --save-dev @babel/core @babel/preset-env babel-loader
+
+12. Set-up babel in webpack.config.js
+                module: {}
+
+13. Create a webpack file for babel (.babelrc)
+14. Install babel-polyfill
+        - there are codes that are not originally in ES5 thus cannot be converted by polyfill
+          babel-polyfill automatically adds them in our code.
+
+        cmd: npm install @babel/polyfill --save
+                - this is not just a dev dependency. its a code that will be in our final bundle thus the use of --save
+
+15. Add polyfill in webpack.config.js
+
+IMPT Notes:
+    Webpack is a static module bundler for modern JavaScript applications. 
+    When webpack processes your application, it internally builds a dependency graph which maps every module your project needs and generates one or more bundles.
+
+    - In package.json "scripts":{ "dev": "webpack"}, 'webpack here refers to webpack.config.js
+    - "dev": "webpack -- mode development" 
+            /* development mode vs production mode
+                 development mode - builds the bundles without minifying/compression codes inorder to be as fast as possible
+                 production mode - automatically enables all optimization e.g. minification, tree shaking to reduce bundle size
+            */
+    - "start": "webpack-dev-server --mode development --open"
+            - start is a script that keeps running in the background, updates and opens browser as soon as code is changed
+
+    - In cmd: npm install webpack-cli --save-dev to be able to access webpack from cmd
+    - In cmd: npm install webpack-dev-server --save-dev so the page will automatically bundle all javascript files and reload page everytime code is saved 
+    
+    - dist folder contains all the files that are to be sent to the client
+    - src folder contains all the source codes, for development only
+    
+   
+
+
+
+
